@@ -19,35 +19,21 @@ Max Verstappen -- Sair """
     opcoes = input(" ")
     parar = True
     while  parar == True:
-        if opcoes == 1:
-            binarioParaOutras(8)
+        if ("1" or "2" or "3") in opcoes:
+            int(opcoes)
+            binarioParaOutras(opcoes)
             parar = False
-        elif opcoes ==2:
-            binarioParaOutras(10)
+        elif ("4" or "5") in opcoes:
+            int(opcoes)
+            octalParaOutras(opcoes)
             parar = False
-        elif opcoes == 3:
-            binarioParaOutras(16)
+        elif ("6" or "7" or "8") in opcoes:
+            int(opcoes)
+            decimalParaOutras(opcoes)
             parar = False
-        elif opcoes ==4:
-            octalParaOutras(2)
-            parar = False
-        elif opcoes ==5:
-            octalParaOutras(10)
-            parar = False
-        elif opcoes ==6:
-            decimalParaOutras(2)
-            parar = False
-        elif opcoes ==7:
-            decimalParaOutras(8)
-            parar = False
-        elif opcoes ==8:
-            decimalParaOutras(16)
-            parar = False
-        elif opcoes ==9:
-            hexaParaOutras(10)
-            parar = False
-        elif opcoes ==10:
-            hexaParaOutras()
+        elif ("9" or "10") in opcoes:
+            int(opcoes)
+            hexaParaOutras(opcoes)
             parar = False
         elif opcoes =="Max Verstappen":
             print("deletando system32 em:") #Sair
@@ -57,29 +43,57 @@ Max Verstappen -- Sair """
 
 
 def pedirNumero():
-    numero = input("Fala um numéro ai")
+    numero = input("Fala um numéro ai ")
     if "," or "." in numero:
         texto = numero.find("," or ".")
-        parteInteira = numero[0, texto -1]
-        parteDecimal = numero[texto + 1, len(numero)]
-        return parteInteira, parteDecimal
+        parteInteira = numero[0: texto -1]
+        parteDecimal = numero[texto + 1: len(numero)]
+        try:
+            tamanhoParteInteira = len(parteInteira)
+            tamanhoParteDecimal = len(parteDecimal)
+            return int(parteInteira), int(parteDecimal), tamanhoParteInteira, tamanhoParteDecimal
+        except:
+            print("Abobrinha")
     else:
         print("texto")
 
-def binarioParaOutras(base):
-    parteInteira,parteDecimal = pedirNumero()
-    print(parteInteira)
-    print(parteDecimal)
-
-def octalParaOutras(base):
-    parteInteira,parteDecimal = pedirNumero()
-
-
-def decimalParaOutras(base):
+def binarioParaOutras(opcoes):
+    if opcoes =="1":
+        base = 8
+    elif opcoes =="2":
+        base = 10
+    else:
+        base = 16
     parteInteira,parteDecimal = pedirNumero()
 
+
+def octalParaOutras(opcoes):
+    if opcoes == "4":
+        base = 2
+    elif opcoes == "5":
+        base = "10"
+    parteInteira,parteDecimal = pedirNumero()
+
+
+def decimalParaOutras(opcoes):
+    if opcoes == "6":
+        base = 2
+    elif opcoes == "7":
+        base = 8
+    else:
+        base = 16
+    parteInteira,parteDecimal,tamanhoParteInteira, tamanhoParteDecimal = pedirNumero()
+    nConvertido=[None]
+    for i in range(0, tamanhoParteInteira):
+        nConvertido.append(parteInteira % base)
+    nConvertido.remove(None)
+    print(nConvertido)
     
-def hexaParaOutras(base):
+def hexaParaOutras(opcoes):
+    if opcoes == "9":
+        base = 2
+    else:
+        base = 10
     parteInteira,parteDecimal = pedirNumero()
     
 
