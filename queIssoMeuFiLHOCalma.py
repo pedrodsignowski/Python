@@ -46,7 +46,7 @@ def pedirNumero():
     numero = input("Fala um numéro ai ")
     if "," or "." in numero:
         texto = numero.find("," or ".")
-        parteInteira = numero[0: texto -1]
+        parteInteira = numero[0 :texto ]
         parteDecimal = numero[texto + 1: len(numero)]
         try:
             tamanhoParteInteira = len(parteInteira)
@@ -78,17 +78,38 @@ def octalParaOutras(opcoes):
 def decimalParaOutras(opcoes):
     if opcoes == "6":
         base = 2
+        funcaoQueConverte(base)
     elif opcoes == "7":
         base = 8
+        funcaoQueConverte(base)
     else:
         base = 16
+        funcaoQueConverte(base)
+
+
+def funcaoQueConverte(base):
     parteInteira,parteDecimal,tamanhoParteInteira, tamanhoParteDecimal = pedirNumero()
-    nConvertido=[None]
-    for i in range(0, tamanhoParteInteira):
-        nConvertido.append(parteInteira % base)
-    nConvertido.remove(None)
-    print(nConvertido)
-    
+    #Começa a parte que converte a parte inteira
+    resto = []
+    quociente = parteInteira
+    while quociente>= base:
+        resto.append(quociente % base)
+        quociente //= base
+
+    resultadoParteInteira = resto
+    resultadoParteInteira.append(quociente)
+    resultadoParteInteira = reversed(resto)
+    resultadoParteInteira = list(resultadoParteInteira)
+    #Fim da parte que converte a parte inteira
+    #Começo da partre que converte depois da virgula
+    restoDepoisDaVirgula = []
+    quocienteDepoisDaVirgula = parteDecimal
+    for i in range(0,5):
+        abobora =  quocienteDepoisDaVirgula*base
+        restoDepoisDaVirgula.append(abobora(0:1))
+        quocienteDepoisDaVirgula = abobora(2:len(quocienteDepoisDaVirgula))
+
+
 def hexaParaOutras(opcoes):
     if opcoes == "9":
         base = 2
