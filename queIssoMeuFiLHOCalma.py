@@ -93,22 +93,23 @@ def funcaoQueConverte(base):
     resto = []
     quociente = parteInteira
     while quociente>= base:
-        resto.append(quociente % base)
-        quociente //= base
+        resto.append(quociente % base) # Obtém o resto
+        quociente //= base # Obtém o quociente
 
     resultadoParteInteira = resto
     resultadoParteInteira.append(quociente)
     resultadoParteInteira = reversed(resto)
     resultadoParteInteira = list(resultadoParteInteira)
     #Fim da parte que converte a parte inteira
-    #Começo da partre que converte depois da virgula
+    #Começo da parte que converte depois da virgula
     restoDepoisDaVirgula = []
     quocienteDepoisDaVirgula = parteDecimal
+    #Fique longe, zona do código radioativa
+    abobora = 0
     for i in range(0,5):
-        abobora =  quocienteDepoisDaVirgula*base
-        restoDepoisDaVirgula.append(abobora(0:1))
-        quocienteDepoisDaVirgula = abobora(2:len(quocienteDepoisDaVirgula))
-
+        sos = quocienteDepoisDaVirgula*base #,750 * 2 =1,5
+        if sos >1:
+            sos -=1
 
 def hexaParaOutras(opcoes):
     if opcoes == "9":
