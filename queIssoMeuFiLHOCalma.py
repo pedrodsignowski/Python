@@ -43,36 +43,47 @@ Max Verstappen -- Sair """
 
 
 def pedirNumero():
-    numero = input("Fala um numéro ai ")
-    if "," or "." in numero:
-        texto = numero.find("," or ".")
-        parteInteira = numero[0 :texto ]
-        parteDecimal = numero[texto + 1: len(numero)]
+    while True:
         try:
-            tamanhoParteInteira = len(parteInteira)
-            tamanhoParteDecimal = len(parteDecimal)
-            return int(parteInteira), int(parteDecimal), tamanhoParteInteira, tamanhoParteDecimal
+            numero = input("Fala um numéro ai ").replace(",",".") 
+            if  "." in numero:
+                texto = numero.find(".")
+                parteInteira = numero[0 :texto ]
+                parteDecimal = numero[texto + 1: len(numero)]
+                tamanhoParteInteira = len(parteInteira)
+                tamanhoParteDecimal = len(parteDecimal)
+                parteDecimal=int(parteDecimal)
+                parteDecimal /=1000
+                return int(parteInteira), parteDecimal, tamanhoParteInteira, tamanhoParteDecimal
+                break
+            else:
+                parteInteira = numero[0:len(numero)]
+                return int(parteInteira),0,0,0 # Retorno padrão para caso não tiver virgula o programa não quebrar
         except:
-            print("Abobrinha")
-    else:
-        print("texto")
+            print("Fale um numéro aí ")
+
 
 def binarioParaOutras(opcoes):
     if opcoes =="1":
         base = 8
+        funcaoQueConverte(base)
     elif opcoes =="2":
         base = 10
+        funcaoQueConverte(base)
     else:
         base = 16
-    parteInteira,parteDecimal = pedirNumero()
+        funcaoQueConverte(base)
 
 
 def octalParaOutras(opcoes):
     if opcoes == "4":
         base = 2
+        funcaoQueConverte(base)
+        funcaoQueConverte(base)
     elif opcoes == "5":
-        base = "10"
-    parteInteira,parteDecimal = pedirNumero()
+        base = 10
+        funcaoQueConverte(base)
+    
 
 
 def decimalParaOutras(opcoes):
@@ -87,36 +98,48 @@ def decimalParaOutras(opcoes):
         funcaoQueConverte(base)
 
 
-def funcaoQueConverte(base):
-    parteInteira,parteDecimal,tamanhoParteInteira, tamanhoParteDecimal = pedirNumero()
-    #Começa a parte que converte a parte inteira
-    resto = []
-    quociente = parteInteira
-    while quociente>= base:
-        resto.append(quociente % base) # Obtém o resto
-        quociente //= base # Obtém o quociente
-
-    resultadoParteInteira = resto
-    resultadoParteInteira.append(quociente)
-    resultadoParteInteira = reversed(resto)
-    resultadoParteInteira = list(resultadoParteInteira)
-    #Fim da parte que converte a parte inteira
-    #Começo da parte que converte depois da virgula
-    restoDepoisDaVirgula = []
-    quocienteDepoisDaVirgula = parteDecimal
-    #Fique longe, zona do código radioativa
-    abobora = 0
-    for i in range(0,5):
-        sos = quocienteDepoisDaVirgula*base #,750 * 2 =1,5
-        if sos >1:
-            sos -=1
 
 def hexaParaOutras(opcoes):
     if opcoes == "9":
         base = 2
+        funcaoQueConverte(base)
     else:
         base = 10
-    parteInteira,parteDecimal = pedirNumero()
+        funcaoQueConverte(base)
+
+
+
+def funcaoQueConverte(base):
+    parteInteira,parteDecimal,tamanhoParteInteira, tamanhoParteDecimal = pedirNumero()
+    #Começa a parte que converte a parte inteira
+    resto = []
+    while parteInteira>= base:
+        resto.append(parteInteira % base) # Obtém o resto
+        parteInteira //= base # Obtém o quociente
+
+    
+    resto.append(parteInteira)
+    resto = reversed(resto)
+    resto = list(resto)
+    print(resto)
+    #Fim da parte que converte a parte inteira
+    #Começo da parte que converte depois da virgula
+    restoDepoisDaVirgula = []
+    
+    quocienteDepoisDaVirgula = parteDecimal
+    #Fique longe, zona do código radioativa
+
+    for i in range(0,5):
+        parteDecimal = parteDecimal*base 
+        if parteDecimal >1:
+            restoDepoisDaVirgula.append(1)
+            parteDecimal -=1
+        else:
+            restoDepoisDaVirgula.append(0)
+    print(restoDepoisDaVirgula)
+
+
+
     
 
 main()
