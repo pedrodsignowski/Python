@@ -1,3 +1,4 @@
+#Nunero de po is d a vi r gu la
 def main():
     menuOpcoes()
     
@@ -46,7 +47,7 @@ def pedirNumero():
     while True:
         try:
             numero = input("Fala um numéro ai ").replace(",",".") 
-            if  "." in numero:
+            if  "." in numero:        
                 texto = numero.find(".")
                 parteInteira = numero[0 :texto ]
                 parteDecimal = numero[texto + 1: len(numero)]
@@ -58,9 +59,11 @@ def pedirNumero():
                 break
             else:
                 parteInteira = numero[0:len(numero)]
-                return int(parteInteira),0,0,0 # Retorno padrão para caso não tiver virgula o programa não quebrar
+                return int(parteInteira),0,0,tamanhoParteDecimal # Retorno padrão para caso não tiver virgula o programa não quebrar
         except:
+            return 0,0,0,0
             print("Fale um numéro aí ")
+            break
 
 
 def binarioParaOutras(opcoes):
@@ -121,7 +124,6 @@ def funcaoQueConverte(base):
     resto.append(parteInteira)
     resto = reversed(resto)
     resto = list(resto)
-    print(resto)
     #Fim da parte que converte a parte inteira
     #Começo da parte que converte depois da virgula
     restoDepoisDaVirgula = []
@@ -129,17 +131,13 @@ def funcaoQueConverte(base):
     quocienteDepoisDaVirgula = parteDecimal
     #Fique longe, zona do código radioativa
 
-    for i in range(0,5):
+    for i in range(0,5):   
         parteDecimal = parteDecimal*base 
         if parteDecimal >1:
             restoDepoisDaVirgula.append(1)
             parteDecimal -=1
         else:
             restoDepoisDaVirgula.append(0)
-    print(restoDepoisDaVirgula)
-
-
-
-    
+    print(*resto ,  "", *restoDepoisDaVirgula)              
 
 main()
